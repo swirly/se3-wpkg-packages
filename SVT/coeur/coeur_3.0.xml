@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8" ?> 
+<packages>
+  <package
+      id="Coeur"
+      name="Coeur 3D"
+      revision="3.0"
+      reboot="false"
+      priority="1"
+      category="SVT"
+      lnk="Coeur.lnk">
+      <variable name="PROGRAMFILES" value="%PROGRAMFILES%" architecture="x86"/>
+      <variable name="PROGRAMFILES" value="%PROGRAMFILES(X86)%" architecture="x64"/>
+      <variable name="ComSpec" value="%SystemRoot%\System32\cmd.exe" architecture="x86"/>
+      <variable name="ComSpec" value="%SystemRoot%\SysWOW64\cmd.exe" architecture="x64"/>
+      <variable name="CSCRIPT" value="%SystemRoot%\System32\cscript.exe" architecture="x86"/>
+      <variable name="CSCRIPT" value="%SystemRoot%\SysWOW64\cscript.exe" architecture="x64"/>
+      <variable name="AllUsersPrograms" value="%ALLUSERSPROFILE%\Menu Démarrer\Programmes" os="5\.\d\.\d{4}"/>
+      <variable name="AllUsersPrograms" value="%ALLUSERSPROFILE%\Microsoft\Windows\Start Menu\Programs" os="6\.\d\.\d{4}"/>
+      <variable name="AllUsersDesktop" value="%SystemDrive%\Documents and Settings\All Users\Bureau" os="5\.\d\.\d{4}"/>
+      <variable name="AllUsersDesktop" value="%SystemDrive%\Users\Public\Desktop" os="6\.\d\.\d{4}"/>
+
+      <download url="http://pedagogie.ac-toulouse.fr/svt/serveur/lycee/perez/coeur/Coeur2.exe" saveto="packages/prog/Coeur.exe" md5sum="3b9fe5fe821032992ae40799f0c2dba7"/>
+      <check type="uninstall" condition="exists" path="Coeur" />
+      <install cmd='%Z%\packages\prog\Coeur.exe /VERYSILENT /SUPPRESSMSGBOXES /NORESTART ' timeout="1800" />
+
+      <upgrade include="install" />
+      <downgrade include="upgrade" />
+      <remove cmd='%PROGRAMFILES%\Coeur\unins000.exe /VERYSILENT' >
+           <exit code="0" reboot="false"/>    
+      </remove>
+  </package>
+</packages>
