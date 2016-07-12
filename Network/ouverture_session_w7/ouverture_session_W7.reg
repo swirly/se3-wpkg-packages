@@ -1,0 +1,7 @@
+Windows Registry Editor Version 5.00
+
+[HKEY_USERS\.DEFAULT\Software\Microsoft\Windows\CurrentVersion\Screensavers\cdi]
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Authentication\LogonUI\Background]
+"OEMBackground"=dword:00000001
+

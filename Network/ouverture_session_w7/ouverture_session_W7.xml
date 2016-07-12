@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<packages>
+  <!-- Application 'Ouverture_Session_W7' extraite de packages.xml -->
+  <package id="Ouverture_Session_W7" name="Ouverture_Session_W7" revision="2014.07.13" reboot="false" priority="1" category="" lnk="">
+  <download url="https://github.com/swirly/se3-wpkg-packages/raw/master/Network/ouverture_session_w7/ouverture_session_W7.reg" saveto="packages/ouverturesession/ouverture_session_W7.reg" md5sum="67f4a4128b76bd70699bdf9670988153" />
+<!-- variables d'environnement pour gérer les exécutables 32 bits afin de les installer indifféremment sur des OS 32 ou 64 bits. -->
+	<variable name="PROGRAMFILES" value="%PROGRAMFILES%" architecture="x86"/>
+	<variable name="PROGRAMFILES" value="%PROGRAMFILES(X86)%" architecture="x64"/>
+	<variable name="ComSpec" value="%SystemRoot%\System32\cmd.exe" architecture="x86"/>
+	<variable name="ComSpec" value="%SystemRoot%\SysWOW64\cmd.exe" architecture="x64"/>
+	<variable name="CSCRIPT" value="%SystemRoot%\System32\cscript.exe" architecture="x86"/>
+	<variable name="CSCRIPT" value="%SystemRoot%\SysWOW64\cscript.exe" architecture="x64"/>
+	<variable name="AllUsersPrograms" value="%ALLUSERSPROFILE%\Menu Démarrer\Programmes" os="5\.\d\.\d{4}"/>
+	<variable name="AllUsersPrograms" value="%ALLUSERSPROFILE%\Microsoft\Windows\Start Menu\Programs" os="6\.\d\.\d{4}"/>
+	<variable name="AllUsersDesktop" value="%SystemDrive%\Documents and Settings\All Users\Bureau" os="5\.\d\.\d{4}"/>
+	<variable name="AllUsersDesktop" value="%SystemDrive%\Users\Public\Desktop" os="6\.\d\.\d{4}"/>
+<!-- test sur la présence d'une clé du registre et d'un fichier  -->
+	<check type="logical" condition="and">
+	<check type="registry" condition="equals" path="HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Authentication\LogonUI\Background\OEMBackground" value="1"/>
+	<check type="file" condition="exists" path="C:\Windows\System32\oobe\info\backgrounds\backgroundDefault.jpg"/>
+	</check>
+<!-- incorporer le fichier ouverture_session_W7.reg dans la base de registre  -->
+	<install cmd="reg.exe import %Z%\packages\ouverturesession\ouverture_session_W7.reg"/>
+<!-- création éventuelle des répertoires locaux dans C:\Windows\System32\oobe pour les fonds d'écran -->
+	<install cmd="cmd /c if not exist &quot;C:\Windows\System32\oobe\info\backgrounds&quot; mkdir &quot;C:\Windows\System32\oobe\info\backgrounds&quot;"/>
+<!-- copier éventuellement l'image backgroundDefault.jpg dans le répertoire c:\windows  -->
+	<install cmd="cmd /c if not exist &quot;C:\Windows\System32\oobe\info\backgrounds\backgroundDefault.jpg&quot; xcopy &quot;%Z%\packages\ouverturesession\*.jpg&quot; &quot;C:\Windows\System32\oobe\info\backgrounds\&quot; /Q /Y"/>
+<!-- on relance les lignes d'installation en cas de nouvelle version du paquet -->
+	<upgrade include="install"/>
+<!-- supprimer la clé de registre et le fichier, à la désinstallation -->
+	<remove cmd="cmd /c if exist &quot;C:\Windows\System32\oobe\info\backgrounds\backgroundDefault.jpg delete &quot;C:\Windows\System32\oobe\info\backgrounds\backgroundDefault.jpg /F"/>
+	</package>
+</packages>
