@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8" ?> 
+<packages>
+  <package
+      id="Cycles"
+      name="Cycles et Hormones"
+      revision="5.0.3"
+      reboot="false"
+      priority="1"
+      category="SVT"
+      >
+
+      <variable name="PROGRAMFILES" value="%PROGRAMFILES%" architecture="x86"/>
+      <variable name="PROGRAMFILES" value="%PROGRAMFILES(X86)%" architecture="x64"/>
+      <variable name="ComSpec" value="%SystemRoot%\System32\cmd.exe" architecture="x86"/>
+      <variable name="ComSpec" value="%SystemRoot%\SysWOW64\cmd.exe" architecture="x64"/>
+      <variable name="CSCRIPT" value="%SystemRoot%\System32\cscript.exe" architecture="x86"/>
+      <variable name="CSCRIPT" value="%SystemRoot%\SysWOW64\cscript.exe" architecture="x64"/>
+      <variable name="AllUsersPrograms" value="%ALLUSERSPROFILE%\Menu Démarrer\Programmes" os="5\.\d\.\d{4}"/>
+      <variable name="AllUsersPrograms" value="%ALLUSERSPROFILE%\Microsoft\Windows\Start Menu\Programs" os="6\.\d\.\d{4}"/>
+      <variable name="AllUsersDesktop" value="%SystemDrive%\Documents and Settings\All Users\Bureau" os="5\.\d\.\d{4}"/>
+      <variable name="AllUsersDesktop" value="%SystemDrive%\Users\Public\Desktop" os="6\.\d\.\d{4}"/>
+
+      <download url="https://github.com/swirly/se3-wpkg-packages/raw/master/SVT/cycles/cycles.exe" saveto="packages/cycles/cycles.exe" md5sum="461028dddb3ba53059b446e4ab330586"/>
+
+      <download url="https://github.com/swirly/se3-wpkg-packages/raw/master/SVT/cycles/hormones.exe" saveto="packages/cycles/hormones.exe" md5sum="70822a9e07415ef34e4f233b9cdf1c3b"/>
+
+      <check type="file" condition="exists" path="%ProgramFiles%\Cycles\cycles.exe"/>
+      <check type="file" condition="exists" path="%ProgramFiles%\Cycles\hormones.exe"/>
+
+      <install cmd='%ComSpec% /C xcopy /c /i /q /h /r /y "%Z%\packages\cycles\*.exe" "%ProgramFiles%\Cycles"' />
+      
+      <install cmd='%Z%\wpkg\tools\nircmd.exe shortcut "%ProgramFiles%\Cycles\cycles.exe" "%AllUsersPrograms%\SVT\" "Cycles"'/>
+      <install cmd='%Z%\wpkg\tools\nircmd.exe shortcut "%ProgramFiles%\Cycles\hormones.exe" "%AllUsersPrograms%\SVT\" "Hormones"'/>
+      
+      <upgrade include="install" />
+      <downgrade include="upgrade" />
+
+      <remove cmd="%ComSpec% /C if exist &quot;%ProgramFiles%\Cycles\cycles.exe*&quot; del /S /Q &quot;%ProgramFiles%\Cycles\cycles.exe*&quot;" />
+      <remove cmd="%ComSpec% /C if exist &quot;%ProgramFiles%\Cycles\hormones.exe*&quot; del /S /Q &quot;%ProgramFiles%\Cycles\hormones.exe*&quot;" />
+      <remove cmd="%ComSpec% /C if exist &quot;%ProgramFiles%\Cycles&quot; rmdir /S /Q &quot;%ProgramFiles%\Cycles&quot;" />
+      
+      <remove cmd="%ComSpec% /C if exist &quot;%AllUsersPrograms%\SVT\Cycles.lnk&quot; del /S /Q &quot;%AllUsersPrograms%\SVT\Cycles.lnk&quot;" />
+      <remove cmd="%ComSpec% /C if exist &quot;%AllUsersPrograms%\SVT\Hormones.lnk&quot; del /S /Q &quot;%AllUsersPrograms%\SVT\Hormones.lnk&quot;" />
+      
+  </package>
+</packages>
