@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8" ?> 
+<packages>
+  <package
+      id="Spectra"
+      name="Visual Spectra Jr"
+      revision="0.9"
+      reboot="false"
+      priority="1"
+      category="SPC" >
+      <download saveto="packages/spectra/setup.exe" />
+      <download saveto="packages/spectra/Drivers/SV2100_Driver_Win7x86_Setup.exe" />
+      <download saveto="packages/spectra/Drivers/SV2100_Driver_Win7x64_Setup.exe" />
+      <download 
+        url="https://github.com/swirly/se3-wpkg-packages/raw/master/SPC/VisualSpectra/certificat.cer" 
+        md5sum="9fc9b409b6b1329e7c76989bdc4d991c"
+        saveto="packages/spectra/Drivers/certificat.cer" 
+      />
+      <!--
+      lnk="VisualSpectra 2.1 Jr.lnk" ????
+      -->
+      <variable name="PROGRAMFILES" value="%PROGRAMFILES%" architecture="x86"/>
+      <variable name="PROGRAMFILES" value="%PROGRAMFILES(X86)%" architecture="x64"/>
+      <variable name="ComSpec" value="%SystemRoot%\System32\cmd.exe" architecture="x86"/>
+      <variable name="ComSpec" value="%SystemRoot%\SysWOW64\cmd.exe" architecture="x64"/>
+      <variable name="CSCRIPT" value="%SystemRoot%\System32\cscript.exe" architecture="x86"/>
+      <variable name="CSCRIPT" value="%SystemRoot%\SysWOW64\cscript.exe" architecture="x64"/>
+      <variable name="AllUsersPrograms" value="%ALLUSERSPROFILE%\Menu Démarrer\Programmes" os="5\.\d\.\d{4}"/>
+      <variable name="AllUsersPrograms" value="%ALLUSERSPROFILE%\Microsoft\Windows\Start Menu\Programs" os="6\.\d\.\d{4}"/>
+      <variable name="AllUsersDesktop" value="%SystemDrive%\Documents and Settings\All Users\Bureau" os="5\.\d\.\d{4}"/>
+      <variable name="AllUsersDesktop" value="%SystemDrive%\Users\Public\Desktop" os="6\.\d\.\d{4}"/>
+      <variable name="Driver" value="%Z%\packages\spectra\Drivers\SV2100_Driver_Win7x86_Setup.exe"  architecture="x86"/>
+      <variable name="Driver" value="%Z%\packages\spectra\Drivers\SV2100_Driver_Win7x64_Setup.exe"  architecture="x64"/>
+      <!--
+      <download url="http://pedagogie.ac-toulouse.fr/svt/serveur/lycee/perez/coeur/Coeur2.exe" saveto="packages/prog/Coeur.exe" md5sum="3b9fe5fe821032992ae40799f0c2dba7"/>
+      -->
+      <check type="uninstall" condition="exists" path="VisualSpectra 2.1 Jr" />
+      <install cmd='Certutil.exe -addstore -f "TrustedPublisher" %Z%\packages\spectra\Drivers\certificat.cer' />
+      <install cmd='%Z%\packages\spectra\setup.exe /S /v/qn ' timeout="1800" />
+      <install cmd='%Driver% /S /v/qn ' timeout="1800" >
+        <exit code="0"/>
+        <exit code="1603"/>
+      </install>
+
+      <!--
+      <upgrade include="install" />
+      <downgrade include="upgrade" />
+      -->
+      
+      <remove cmd='MsiExec.exe /X{5B20FA2E-F5E9-41A6-891A-B31D9DC0E3B5} /qn' >
+           <exit code="0" reboot="false"/>    
+      </remove>
+    -->
+  </package>
+</packages>
