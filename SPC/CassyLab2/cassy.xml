@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8" ?> 
+<packages>
+  <package
+      id="Cassy"
+      name="Cassy Lab 2"
+      revision="2"
+      reboot="false"
+      priority="1"
+      category="SPC" >
+      <download 
+        url="http://www.ld-didactic.de/index.php?eID=tx_nawsecuredl&amp;u=0&amp;g=0&amp;t=1474555455&amp;hash=f373b609f756060e1a365b59df96ea463986dada&amp;lang=de&amp;prevPage=https%253A%252F%252Fwww.google.fr%252F&amp;file=software/cassylab2_fr.msi"
+        md5sum="84bcda9de2467250e7953394c71827f7"
+        saveto="packages/cassy/cassylab2_fr.msi"
+      />
+
+      <download 
+        url="https://github.com/swirly/se3-wpkg-packages/raw/master/SPC/CassyLab2/CASSYLab.licence.modele"
+        md5sum="7d04ed3566491351d24201d571dc608b"
+        saveto="packages/cassy/CASSYLab.licence.modele"
+      />
+
+      <variable name="PROGRAMFILES" value="%PROGRAMFILES%" architecture="x86"/>
+      <variable name="PROGRAMFILES" value="%PROGRAMFILES(X86)%" architecture="x64"/>
+      <variable name="ComSpec" value="%SystemRoot%\System32\cmd.exe" architecture="x86"/>
+      <variable name="ComSpec" value="%SystemRoot%\SysWOW64\cmd.exe" architecture="x64"/>
+      <variable name="CSCRIPT" value="%SystemRoot%\System32\cscript.exe" architecture="x86"/>
+      <variable name="CSCRIPT" value="%SystemRoot%\SysWOW64\cscript.exe" architecture="x64"/>
+      <variable name="AllUsersPrograms" value="%ALLUSERSPROFILE%\Menu Démarrer\Programmes" os="5\.\d\.\d{4}"/>
+      <variable name="AllUsersPrograms" value="%ALLUSERSPROFILE%\Microsoft\Windows\Start Menu\Programs" os="6\.\d\.\d{4}"/>
+      <variable name="AllUsersDesktop" value="%SystemDrive%\Documents and Settings\All Users\Bureau" os="5\.\d\.\d{4}"/>
+      <variable name="AllUsersDesktop" value="%SystemDrive%\Users\Public\Desktop" os="6\.\d\.\d{4}"/>
+      <variable name="Driver" value="%Z%\packages\spectra\Drivers\SV2100_Driver_Win7x86_Setup.exe"  architecture="x86"/>
+      <variable name="Driver" value="%Z%\packages\spectra\Drivers\SV2100_Driver_Win7x64_Setup.exe"  architecture="x64"/>
+      
+      <check type="file" condition="exists" path="%PROGRAMFILES%\LD DIDACTIC\CASSYLAB2\CASSYLab2.exe"/>
+
+      <install cmd='msiexec /qn /norestart /i "%Z%\packages\cassy\cassylab2_fr.msi" ' timeout="1800" />
+
+      <!--
+         Création du dossier de rangement par catégorie Internet si absent
+      -->
+      <install cmd='%ComSpec% /C if /i not exist "%AllUsersPrograms%\SPC" start "" /b /wait md "%AllUsersPrograms%\SPC" '/>
+      <!--  On bouge le répertoire  -->
+      <install cmd='%COMSPEC% /c if exist "%AllUsersPrograms%\CASSY*" move /y "%AllUsersPrograms%\CASSY*" "%AllUsersPrograms%\SPC\" '/>
+      <!-- copie du fichier de licence -->
+      <install cmd="cmd /c if not exist &quot;C:\ProgramData\LD&quot; mkdir &quot;C:\ProgramData\LD&quot;"/>
+      <install cmd="%COMSPEC% /c xcopy &quot;%Z%\packages\cassy\CASSYLab.licence&quot; &quot;C:\ProgramData\LD\&quot; /Q /Y" />
+      <!-- Suppression du raccourci sur le bureau -->
+      <install cmd='%ComSpec% /c If Exist "%AllUsersDesktop%\CASSY Lab 2.lnk" del /F /Q "%AllUsersDesktop%\CASSY Lab 2.lnk"'/>
+
+      <remove cmd='MsiExec.exe /X{1EDFB1BD-1309-4BC2-95AA-0553F1056CEE} /qn' >
+           <exit code="0" reboot="false"/>  
+           <exit code="1605" reboot="false"/>  
+      </remove>
+      <remove cmd="cmd /c if exist &quot;C:\ProgramData\LD\CASSYLab.licence&quot; del /F /Q &quot;C:\ProgramData\LD\CASSYLab.licence&quot;"/> 
+  </package>
+</packages>
