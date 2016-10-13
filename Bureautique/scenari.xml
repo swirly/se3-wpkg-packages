@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8" ?> 
+<packages>
+  <package
+    id="Scenari"
+    name="Scenari Platform"
+    revision="4.2.1.01"
+    reboot="false"
+    priority="1"
+    category="Bureautique" 
+    lnk="SCENARIChain 4.2">
+    <download url="https://download.scenari.org/scenari/files/SCENARIchain/win/latestStable/SCENARIchain_4.2.1.01_fr-FR.exe" 
+      saveto="packages/Scenari/ScenariChainSetup.exe" 
+      md5sum="7aca8ae6d4c1dca4a267f04da8a59de1"/>
+
+      <variable name="PROGRAMFILES" value="%PROGRAMFILES%" architecture="x86"/>
+      <variable name="PROGRAMFILES" value="%PROGRAMFILES(X86)%" architecture="x64"/>
+      <variable name="ComSpec" value="%SystemRoot%\System32\cmd.exe" architecture="x86"/>
+      <variable name="ComSpec" value="%SystemRoot%\SysWOW64\cmd.exe" architecture="x64"/>
+      <variable name="CSCRIPT" value="%SystemRoot%\System32\cscript.exe" architecture="x86"/>
+      <variable name="CSCRIPT" value="%SystemRoot%\SysWOW64\cscript.exe" architecture="x64"/>
+      <variable name="AllUsersPrograms" value="%ALLUSERSPROFILE%\Menu Démarrer\Programmes" os="5\.\d\.\d{4}"/>
+      <variable name="AllUsersPrograms" value="%ALLUSERSPROFILE%\Microsoft\Windows\Start Menu\Programs" os="6\.\d\.\d{4}"/>
+      <variable name="AllUsersDesktop" value="%SystemDrive%\Documents and Settings\All Users\Bureau" os="5\.\d\.\d{4}"/>
+      <variable name="AllUsersDesktop" value="%SystemDrive%\Users\Public\Desktop" os="6\.\d\.\d{4}"/>
+      
+      <check type="uninstall" condition="exists" path="SCENARIchain 4.2"/>
+      <install cmd='%Z%\packages\Scenari\ScenariChainSetup.exe /S' timeout="1800" />
+      <!-- pas de raccourci sur le bureau -->
+      <install cmd="%ComSpec% /C if exist &quot;%AllUsersDesktop%\SCENARIchain 4.2.lnk&quot; del /S /Q &quot;%AllUsersDesktop%\SCENARIchain 4.2.lnk&quot;"/>
+
+      <remove cmd='%PROGRAMFILES%\SCENARI\SCENARIchain4.2\uninst.exe /S' >
+       <exit code="0" reboot="false"/>    
+     </remove>
+   </package>
+ </packages>

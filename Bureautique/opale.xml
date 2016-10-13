@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8" ?> 
+<packages>
+  <package
+    id="Opale"
+    name="Opale"
+    revision="3.6.020"
+    reboot="false"
+    priority="1"
+    category="Bureautique" 
+    lnk="Opale 3.6">
+    <download url="https://download.scenari.org/opale/files/latestStable/win/opale_3.6.020.exe" 
+      saveto="packages/Scenari/opale.exe" 
+      md5sum="ba883f4685d3b90063d5e628f1b370c1"/>
+
+      <variable name="PROGRAMFILES" value="%PROGRAMFILES%" architecture="x86"/>
+      <variable name="PROGRAMFILES" value="%PROGRAMFILES(X86)%" architecture="x64"/>
+      <variable name="ComSpec" value="%SystemRoot%\System32\cmd.exe" architecture="x86"/>
+      <variable name="ComSpec" value="%SystemRoot%\SysWOW64\cmd.exe" architecture="x64"/>
+      <variable name="CSCRIPT" value="%SystemRoot%\System32\cscript.exe" architecture="x86"/>
+      <variable name="CSCRIPT" value="%SystemRoot%\SysWOW64\cscript.exe" architecture="x64"/>
+      <variable name="AllUsersPrograms" value="%ALLUSERSPROFILE%\Menu Démarrer\Programmes" os="5\.\d\.\d{4}"/>
+      <variable name="AllUsersPrograms" value="%ALLUSERSPROFILE%\Microsoft\Windows\Start Menu\Programs" os="6\.\d\.\d{4}"/>
+      <variable name="AllUsersDesktop" value="%SystemDrive%\Documents and Settings\All Users\Bureau" os="5\.\d\.\d{4}"/>
+      <variable name="AllUsersDesktop" value="%SystemDrive%\Users\Public\Desktop" os="6\.\d\.\d{4}"/>
+      
+      <check type="uninstall" condition="exists" path="Opale 3.6"/>
+      <install cmd='%Z%\packages\Scenari\opale.exe /S' timeout="1800" />
+      <!-- pas de raccourci sur le bureau -->
+      <install cmd="%ComSpec% /C if exist &quot;%AllUsersDesktop%\Opale 3.6.lnk&quot; del /S /Q &quot;%AllUsersDesktop%\Opale 3.6.lnk&quot;"/>
+
+      <remove cmd='%PROGRAMFILES%\Opale3.6\uninst.exe /S' >
+       <exit code="0" reboot="false"/>    
+     </remove>
+   </package>
+ </packages>
