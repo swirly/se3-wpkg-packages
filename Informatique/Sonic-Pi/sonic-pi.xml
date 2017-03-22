@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<packages>
+  <package
+      id="sonic-pi"
+      name="Sonic PI : Live coding music synth"
+      revision="2.11.1"
+      reboot="false"
+      priority="1"
+      category="Informatique"
+      lnk="Sonic Pi.lnk">
+      <variable name="PROGRAMFILES" value="%PROGRAMFILES%" architecture="x86"/>
+      <variable name="PROGRAMFILES" value="%PROGRAMFILES(X86)%" architecture="x64"/>
+      <variable name="ComSpec" value="%SystemRoot%\System32\cmd.exe" architecture="x86"/>
+      <variable name="ComSpec" value="%SystemRoot%\SysWOW64\cmd.exe" architecture="x64"/>
+      <variable name="CSCRIPT" value="%SystemRoot%\System32\cscript.exe" architecture="x86"/>
+      <variable name="CSCRIPT" value="%SystemRoot%\SysWOW64\cscript.exe" architecture="x64"/>
+      <variable name="AllUsersPrograms" value="%ALLUSERSPROFILE%\Menu Démarrer\Programmes" os="5\.\d\.\d{4}"/>
+      <variable name="AllUsersPrograms" value="%ALLUSERSPROFILE%\Microsoft\Windows\Start Menu\Programs" os="6\.\d\.\d{4}"/>
+      <variable name="AllUsersDesktop" value="%SystemDrive%\Documents and Settings\All Users\Bureau" os="5\.\d\.\d{4}"/>
+      <variable name="AllUsersDesktop" value="%SystemDrive%\Users\Public\Desktop" os="6\.\d\.\d{4}"/>
+
+      <download url="http://sonic-pi.net/files/releases/v2.11.1/Sonic-Pi-for-Win-v2.11.1.msi" saveto="packages/sonic-pi/sonic-pi.msi" md5sum="17df9522d44422f8e12950bb2574eef8"/>
+      <check type="uninstall" condition="exists" path="Sonic Pi" />
+      <install cmd='msiexec /I "%Z%\packages\sonic-pi\sonic-pi.msi" /qn' timeout="1800" />
+      <install cmd='%ComSpec% /C If /i Exist &quot;%AllUsersPrograms%\Sonic Pi&quot; move /Y &quot;%AllUsersPrograms%\Sonic Pi&quot; &quot;%AllUsersPrograms%\Informatique\&quot;' />
+      <upgrade include="install" />
+      <downgrade include="upgrade" />
+      <remove cmd="wmic product where name=&quot;Sonic Pi&quot; call uninstall">
+      </remove>
+  </package>
+</packages>

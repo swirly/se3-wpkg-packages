@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<packages>
+  <package
+      id="Atom"
+      name="Atom : un éditeur pour le développement"
+      revision="1.14.1"
+      reboot="false"
+      priority="1"
+      category="Informatique"
+      lnk="Atom.lnk">
+      <variable name="InstallLog" value="%SystemDrive%\Netinst\Logs\Atom.txt"/>
+      <variable name="version" value="64" architecture="x64"/>
+      <variable name="version" value="32" architecture="x86"/>
+      <variable name="ComSpec" value="%SystemRoot%\System32\cmd.exe" architecture="x86"/>
+      <variable name="ComSpec" value="%SystemRoot%\SysWOW64\cmd.exe" architecture="x64"/>
+      <variable name="CSCRIPT" value="%SystemRoot%\System32\cscript.exe" architecture="x86"/>
+      <variable name="CSCRIPT" value="%SystemRoot%\SysWOW64\cscript.exe" architecture="x64"/>
+      <variable name="AllUsersPrograms" value="%ALLUSERSPROFILE%\Menu Démarrer\Programmes" os="5\.\d\.\d{4}"/>
+      <variable name="AllUsersPrograms" value="%ALLUSERSPROFILE%\Microsoft\Windows\Start Menu\Programs" os="6\.\d\.\d{4}"/>
+      <variable name="AllUsersDesktop" value="%SystemDrive%\Documents and Settings\All Users\Bureau" os="5\.\d\.\d{4}"/>
+      <variable name="AllUsersDesktop" value="%SystemDrive%\Users\Public\Desktop" os="6\.\d\.\d{4}"/>
+      <variable name="ZIPFILE" value="%Z%\packages\atom\atom32.zip" architecture="x86"/>
+      <variable name="ZIPFILE" value="%Z%\packages\atom\atom64.zip" architecture="x64"/>
+
+      <download url="https://github.com/atom/atom/releases/download/v1.14.2/atom-windows.zip"
+         saveto="packages/atom/atom32.zip"
+         md5sum="35eb84aac01fb91634418faed1723fbb"
+         />
+      <download url="https://github.com/atom/atom/releases/download/v1.14.2/atom-x64-windows.zip"
+          saveto="packages/atom/atom64.zip"
+          md5sum="39514c7d859d36e5bed9183cc11776fd"
+          />
+      <download url="https://github.com/swirly/se3-wpkg-packages/raw/master/Informatique/Atom/atomInstall.bat"
+        saveto="packages/atom/atomInstall.bat"
+        md5sum="88d1937e15ed25aba4cc1af82e596a27"
+        />
+      <download url="https://github.com/swirly/se3-wpkg-packages/raw/master/Informatique/Atom/Atom.lnk"
+        saveto="packages/atom/Atom.lnk"
+        md5sum="75349970f9ae508613207fe3a78f8f78"
+        />
+      <check type="file" condition="exists" path="%systemdrive%\Program Files\Atom\atom.exe" />
+
+      <install cmd='%ComSpec% /E:ON /V:ON /C call %Z%\packages\atom\atomInstall.bat install %version% &gt;%InstallLog% 2&gt;&amp;1' timeout="1800">
+          <exit code="0" reboot="false" />
+      </install>
+      <upgrade include="install" />
+      <downgrade include="upgrade" />
+      <remove cmd='%ComSpec% /E:ON /V:ON /C call %Z%\packages\atom\atomInstall.bat unInstall %version%' timeout="1800">
+           <exit code="0" reboot="false" />
+      </remove>
+  </package>
+</packages>
