@@ -25,6 +25,8 @@ else (
 
 mkdir "%AllUsersPrograms%\Informatique\"
 xcopy /y %Z%\packages\atom\Atom.lnk "%AllUsersPrograms%\Informatique\"
+
+reg.exe import %Z%\packages\atom\atom_home.reg
 exit /b
 
 

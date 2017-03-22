@@ -3,7 +3,7 @@
   <package
       id="Atom"
       name="Atom : un éditeur pour le développement"
-      revision="1.14.1"
+      revision="1.14.2"
       reboot="false"
       priority="1"
       category="Informatique"
@@ -32,12 +32,18 @@
           />
       <download url="https://github.com/swirly/se3-wpkg-packages/raw/master/Informatique/Atom/atomInstall.bat"
         saveto="packages/atom/atomInstall.bat"
-        md5sum="88d1937e15ed25aba4cc1af82e596a27"
+        md5sum="112fd07250750b08bb38d7142c584b69"
         />
       <download url="https://github.com/swirly/se3-wpkg-packages/raw/master/Informatique/Atom/Atom.lnk"
         saveto="packages/atom/Atom.lnk"
         md5sum="75349970f9ae508613207fe3a78f8f78"
         />
+      <download url="https://github.com/swirly/se3-wpkg-packages/raw/master/Informatique/Atom/Atom.lnk"
+        saveto="packages/atom/atom_home.reg"
+        md5sum="ba5bdd01ff29051a76a73e0d9fb34443"
+        />
+
+
       <check type="file" condition="exists" path="%systemdrive%\Program Files\Atom\atom.exe" />
 
       <install cmd='%ComSpec% /E:ON /V:ON /C call %Z%\packages\atom\atomInstall.bat install %version% &gt;%InstallLog% 2&gt;&amp;1' timeout="1800">
