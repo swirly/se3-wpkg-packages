@@ -3,7 +3,7 @@
   <package
       id="Atom"
       name="Atom : un éditeur pour le développement"
-      revision="1.15.0"
+      revision="1.15.1"
       reboot="false"
       priority="1"
       category="Informatique"
@@ -32,7 +32,7 @@
           />
       <download url="https://github.com/swirly/se3-wpkg-packages/raw/master/Informatique/Atom/atomInstall.bat"
         saveto="packages/atom/atomInstall.bat"
-        md5sum="112fd07250750b08bb38d7142c584b69"
+        md5sum="f4fa8dae1d6643f155b82e54c2fec172"
         />
       <download url="https://github.com/swirly/se3-wpkg-packages/raw/master/Informatique/Atom/Atom.lnk"
         saveto="packages/atom/Atom.lnk"

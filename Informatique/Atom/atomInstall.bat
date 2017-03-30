@@ -37,5 +37,8 @@ del /F /Q "%AllUsersPrograms%\Informatique\Atom.lnk"
 exit /b
 
 :Rename64
+if exist "%systemdrive%\Program Files\Atom" (
+  rmdir /S /Q "%systemdrive%\Program Files\Atom"
+)
 move /Y "%systemdrive%\Program Files\Atom x64" "%systemdrive%\Program Files\Atom"
 exit /b
