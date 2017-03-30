@@ -27,6 +27,16 @@ mkdir "%AllUsersPrograms%\Informatique\"
 xcopy /y %Z%\packages\atom\Atom.lnk "%AllUsersPrograms%\Informatique\"
 
 reg.exe import %Z%\packages\atom\atom_home.reg
+
+rem Install floobits dir
+set FLOOPERSISTENT="%systemdrive%\Program Files\Atom\~\floobits"
+if not exist "%FLOOPERSISTENT%" (
+	echo "ajout du repertoire %FLOOPERSISTENT% pour floobits et atom"
+    mkdir %FLOOPERSISTENT%
+)
+echo "fixer les droits pour floobits et ATOM"
+icacls %FLOOPERSISTENT% /grant "tout le monde":(CI)F /T /Q >NUL
+
 exit /b
 
 
