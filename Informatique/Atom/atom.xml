@@ -3,7 +3,7 @@
   <package
       id="Atom"
       name="Atom : un éditeur pour le développement"
-      revision="1.15.2"
+      revision="1.19.5"
       reboot="false"
       priority="1"
       category="Informatique"
@@ -22,13 +22,13 @@
       <variable name="ZIPFILE" value="%Z%\packages\atom\atom32.zip" architecture="x86"/>
       <variable name="ZIPFILE" value="%Z%\packages\atom\atom64.zip" architecture="x64"/>
 
-      <download url="https://github.com/atom/atom/releases/download/v1.15.0/atom-windows.zip"
+      <download url="https://github.com/atom/atom/releases/download/v1.19.5/atom-windows.zip"
          saveto="packages/atom/atom32.zip"
-         md5sum="7fb257c30ff7879668c7c4930b188e9b"
+         md5sum="68e7cfdf0aacd29188d2aabc44b87646"
          />
-      <download url="https://github.com/atom/atom/releases/download/v1.15.0/atom-x64-windows.zip"
+      <download url="https://github.com/atom/atom/releases/download/v1.19.5/atom-x64-windows.zip"
           saveto="packages/atom/atom64.zip"
-          md5sum="de181674f60e816bd5f91c5bc4a77b92"
+          md5sum="f4c1be17d431f4f02d99f71733e56c0d"
           />
       <download url="https://github.com/swirly/se3-wpkg-packages/raw/master/Informatique/Atom/atomInstall.bat"
         saveto="packages/atom/atomInstall.bat"
@@ -49,6 +49,7 @@
       <install cmd='%ComSpec% /E:ON /V:ON /C call %Z%\packages\atom\atomInstall.bat install %version% &gt;%InstallLog% 2&gt;&amp;1' timeout="1800">
           <exit code="0" reboot="false" />
       </install>
+      <upgrade include="uninstall" />
       <upgrade include="install" />
       <downgrade include="upgrade" />
       <remove cmd='%ComSpec% /E:ON /V:ON /C call %Z%\packages\atom\atomInstall.bat unInstall %version%' timeout="1800">

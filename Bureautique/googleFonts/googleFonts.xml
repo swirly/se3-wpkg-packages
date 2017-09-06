@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<packages>
+    <package id="googleFonts" name="Polices Google Fonts" revision="0.9" reboot="false" priority="2" category="Bureautique">
+        <!-- Programmes d'installations -->
+        <download url="https://github.com/swirly/se3-wpkg-packages/raw/master/Bureautique/googleFonts/FontReg32.exe" saveto="packages/googleFonts/FontReg32.exe" md5sum="ce49c477e640463a4f4173e01b661101"/>
+        <download url="https://github.com/swirly/se3-wpkg-packages/raw/master/Bureautique/googleFonts/FontReg64.exe" saveto="packages/googleFonts/FontReg64.exe" md5sum="76189f3c67ea017edbeece0aefcdc811"/>
+        <!--  définition du programme d'installation suivant l'architecture -->
+        <variable name="FontReg" value="%Z%\packages\googleFonts\FontReg32.exe" architecture="x86"/>
+        <variable name="FontReg" value="%Z%\packages\googleFonts\FontReg64.exe" architecture="x64"/>
+
+        <!-- Polices de caractère -->
+        <download url="https://fonts.google.com/download?family=Inconsolata" saveto"packages/googleFonts/Inconsolata.zip" md5sum="5b4c9507198eccc4f1d386e9d060b08a"/>
+
+        <variable name="ComSpec" value="%SystemRoot%\System32\cmd.exe" architecture="x86"/>
+        <variable name="ComSpec" value="%SystemRoot%\SysWOW64\cmd.exe" architecture="x64"/>
+        <variable name="CSCRIPT" value="%SystemRoot%\System32\cscript.exe" architecture="x86"/>
+        <variable name="CSCRIPT" value="%SystemRoot%\SysWOW64\cscript.exe" architecture="x64"/>
+        <variable name="AllUsersPrograms" value="%ALLUSERSPROFILE%\Menu Démarrer\Programmes" os="5\.\d\.\d{4}"/>
+        <variable name="AllUsersPrograms" value="%ALLUSERSPROFILE%\Microsoft\Windows\Start Menu\Programs" os="6\.\d\.\d{4}"/>
+        <variable name="AllUsersDesktop" value="%SystemDrive%\Documents and Settings\All Users\Bureau" os="5\.\d\.\d{4}"/>
+        <variable name="AllUsersDesktop" value="%SystemDrive%\Users\Public\Desktop" os="6\.\d\.\d{4}"/>
+
+        <check type="uninstall" condition="exists" path="Opale 3.6"/>
+        <install cmd='%Z%\packages\Scenari\opale.exe /S' timeout="1800"/>
+        <!-- pas de raccourci sur le bureau -->
+        <install cmd="%ComSpec% /C if exist &quot;%AllUsersDesktop%\Opale 3.6.lnk&quot; del /S /Q &quot;%AllUsersDesktop%\Opale 3.6.lnk&quot;"/>
+
+        <remove cmd='%PROGRAMFILES%\Opale3.6\uninst.exe /S'>
+            <exit code="0" reboot="false"/>
+        </remove>
+    </package>
+</packages>
