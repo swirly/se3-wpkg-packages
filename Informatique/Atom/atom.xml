@@ -3,7 +3,7 @@
   <package
       id="Atom"
       name="Atom : un éditeur pour le développement"
-      revision="1.19.5"
+      revision="1.24"
       reboot="false"
       priority="1"
       category="Informatique"
@@ -22,13 +22,13 @@
       <variable name="ZIPFILE" value="%Z%\packages\atom\atom32.zip" architecture="x86"/>
       <variable name="ZIPFILE" value="%Z%\packages\atom\atom64.zip" architecture="x64"/>
 
-      <download url="https://github.com/atom/atom/releases/download/v1.19.5/atom-windows.zip"
+      <download url="https://github.com/atom/atom/releases/download/v1.24.1/atom-windows.zip"
          saveto="packages/atom/atom32.zip"
-         md5sum="68e7cfdf0aacd29188d2aabc44b87646"
+         md5sum="abe8c9fb760d23fa86f8d4a2771fe58d"
          />
-      <download url="https://github.com/atom/atom/releases/download/v1.19.5/atom-x64-windows.zip"
+      <download url="https://github.com/atom/atom/releases/download/v1.24.1/atom-x64-windows.zip"
           saveto="packages/atom/atom64.zip"
-          md5sum="f4c1be17d431f4f02d99f71733e56c0d"
+          md5sum="f9021e0c012692e8af29866191e641c5"
           />
       <download url="https://github.com/swirly/se3-wpkg-packages/raw/master/Informatique/Atom/atomInstall.bat"
         saveto="packages/atom/atomInstall.bat"
@@ -38,7 +38,7 @@
         saveto="packages/atom/Atom.lnk"
         md5sum="75349970f9ae508613207fe3a78f8f78"
         />
-      <download url="https://github.com/swirly/se3-wpkg-packages/raw/master/Informatique/Atom/Atom.lnk"
+      <download url="https://github.com/swirly/se3-wpkg-packages/raw/master/Informatique/Atom/atom_home.reg"
         saveto="packages/atom/atom_home.reg"
         md5sum="d9383053f7047705d64f5d3e502107af"
         />
