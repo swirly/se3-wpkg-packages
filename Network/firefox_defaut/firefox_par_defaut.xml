@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<packages>
+<!--	Firefox par défaut -->
+<!--	Avant d'installer ce paquet,
+	copier le fichier HTTPfirefox.reg
+	dans le dossier Y:\unattended\install\packages\firefox\
+	-->
+	<package
+		id	="Firefoxdefaut"
+		name	="Firefox par defaut"
+		revision="1.0.7"
+		reboot	="false"
+		priority="1">
+		<download url="https://github.com/swirly/se3-wpkg-packages/raw/master/Network/firefox_defaut/httpfirefox.reg"
+			saveto="packages/firefox/httpfirefox.reg"
+			md5sum="794df6599a5813e5a40e254d8662d669"
+			/>
+		<download url="https://github.com/swirly/se3-wpkg-packages/raw/master/Network/firefox_defaut/httpfirefox64.reg"
+			saveto="packages/firefox/httpfirefox64.reg"
+			md5sum="d173fe39c5cbc82bd6fb48e52c3c0c60"
+			/>
+<!-- variables d'environnement pour gérer les exécutables 32 bits afin de les installer indifféremment sur des OS 32 ou 64 bits. -->
+      <variable name="PROGRAMFILES" value="%PROGRAMFILES%" architecture="x86"/>
+      <variable name="PROGRAMFILES" value="%PROGRAMFILES(X86)%" architecture="x64"/>
+      <variable name="ComSpec" value="%SystemRoot%\System32\cmd.exe" architecture="x86"/>
+      <variable name="ComSpec" value="%SystemRoot%\SysWOW64\cmd.exe" architecture="x64"/>
+      <variable name="CSCRIPT" value="%SystemRoot%\System32\cscript.exe" architecture="x86"/>
+      <variable name="CSCRIPT" value="%SystemRoot%\SysWOW64\cscript.exe" architecture="x64"/>
+      <variable name="AllUsersPrograms" value="%ALLUSERSPROFILE%\Menu Démarrer\Programmes" os="5\.\d\.\d{4}"/>
+      <variable name="AllUsersPrograms" value="%ALLUSERSPROFILE%\Microsoft\Windows\Start Menu\Programs" os="6\.\d\.\d{4}"/>
+			<variable name="REGFILE" value="%Z%\packages\firefox\HTTPfirefox.reg" architecture="x86"/>
+			<variable name="REGFILE" value="%Z%\packages\firefox\HTTPfirefox64.reg" architecture="x64"/>
+<!-- test sur la présence d'une clé du registre  -->
+	<check type="registry" condition="exists" path="HKLM\Software\firefoxdefaut\"/>
+<!-- création d'une clé dans la base de registre  -->
+	<install cmd="reg.exe ADD HKLM\Software\firefoxdefaut\ /f"/>
+<!-- incorporer le fichier HTTPfirefox dans la base de registre  -->
+	<install cmd="reg.exe import %Z%\packages\firefox\HTTPfirefox.reg"/>
+	<upgrade include="install"/>
+<!-- supprimer la clé de registre à la désinstallation -->
+	<remove cmd="reg.exe DELETE HKLM\Software\firefoxdefaut\ /f"/>
+	</package>
+</packages>
