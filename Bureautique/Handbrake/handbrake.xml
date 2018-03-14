@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<packages>
+  <package
+      id="Handbrake"
+      name="HandBrake"
+      revision="1.0.7"
+      reboot="false"
+      priority="1"
+      category="Bureautique"
+      lnk="Handbrake.lnk">
+      <variable name="InstallLog" value="%SystemDrive%\Netinst\Logs\Handbrake.txt"/>
+      <variable name="version" value="64" architecture="x64"/>
+      <variable name="version" value="32" architecture="x86"/>
+      <variable name="ComSpec" value="%SystemRoot%\System32\cmd.exe" architecture="x86"/>
+      <variable name="ComSpec" value="%SystemRoot%\SysWOW64\cmd.exe" architecture="x64"/>
+      <variable name="CSCRIPT" value="%SystemRoot%\System32\cscript.exe" architecture="x86"/>
+      <variable name="CSCRIPT" value="%SystemRoot%\SysWOW64\cscript.exe" architecture="x64"/>
+      <variable name="AllUsersPrograms" value="%ALLUSERSPROFILE%\Menu Démarrer\Programmes" os="5\.\d\.\d{4}"/>
+      <variable name="AllUsersPrograms" value="%ALLUSERSPROFILE%\Microsoft\Windows\Start Menu\Programs" os="6\.\d\.\d{4}"/>
+      <variable name="AllUsersDesktop" value="%SystemDrive%\Documents and Settings\All Users\Bureau" os="5\.\d\.\d{4}"/>
+      <variable name="AllUsersDesktop" value="%SystemDrive%\Users\Public\Desktop" os="6\.\d\.\d{4}"/>
+      <variable name="HBINSFILE" value="%Z%\packages\handbrake\handbrake_32.exe" architecture="x86"/>
+      <variable name="HBINSFILE" value="%Z%\packages\handbrake\handbrake_64.exe" architecture="x64"/>
+      <variable name="HBDLLFILE" value="%Z%\packages\handbrake\libdvdcss-2_32.dll" architecture="x86"/>
+      <variable name="HBDLLFILE" value="%Z%\packages\handbrake\libdvdcss-2_64.dll" architecture="x64"/>
+
+      <download url="https://download2.handbrake.fr/1.0.7/HandBrake-1.0.7-i686-Win_GUI.exe"
+         saveto="packages/handbrake/handbrake_32.exe"
+         md5sum="e467dbd669ae9db999e5a1516589042c"
+         />
+      <download url="https://download.handbrake.fr/releases/1.0.7/HandBrake-1.0.7-x86_64-Win_GUI.exe"
+          saveto="packages/handbrake/handbrake_64.exe"
+          md5sum="d2c438498bc62f1b0c81da68cf0f8bf9"
+          />
+      <download url="https://download.videolan.org/pub/libdvdcss/1.2.11/win64/libdvdcss-2.dll"
+        saveto="packages/handbrake/libdvdcss-2_64.dll"
+        md5sum="3b41a830cf2794db096e55ec783b97b4"
+        />
+      <download url="https://download.videolan.org/pub/libdvdcss/1.2.11/win32/libdvdcss-2.dll"
+        saveto="packages/handbrake/libdvdcss-2_32.dll"
+        md5sum="6a4cf583d0fc447673ee1abfc4e3b711"
+        />
+
+      <check type="logical" condition="and">
+        <check type="file" condition="exists" path="%systemdrive%\Program Files\HandBrake\HandBrake.exe" />
+        <check type="file" condition="exists" path="%systemdrive%\Program Files\HandBrake\libdvdcss-2.dll" />
+      </check>
+
+      <install cmd="%ComSpec% /E:ON /V:ON /C call %HBINSFILE% /S  &gt;%InstallLog%" />
+      <install cmd="%ComSpec% /C copy /y &quot;%HBDLLFILE%&quot; &quot;%PROGRAMFILES%\HandBrake\libdvdcss-2.dll&quot;  &gt;%InstallLog%" />
+
+      <upgrade include="uninstall" />
+      <upgrade include="install" />
+      <downgrade include="upgrade" />
+      <remove cmd="%ComSpec% /E:ON /V:ON /C call %PROGRAMFILES%\HandBrake\uninst.exe /S" timeout="1800">
+           <exit code="0" reboot="false" />
+      </remove>
+  </package>
+</packages>
