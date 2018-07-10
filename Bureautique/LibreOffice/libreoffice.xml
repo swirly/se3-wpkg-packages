@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <packages>
-	<package id="LibreOffice" name="LibreOffice 6.0" revision="6.0.5" reboot="false" priority="1" category="Bureautique" lnk="LibreOffice 6.0" category2="Bureautique" compatibilite="6">
+	<package id="LibreOffice" name="LibreOffice 6.0" revision="6.0.5.2" reboot="false" priority="1" category="Bureautique" lnk="LibreOffice 6.0" category2="Bureautique" compatibilite="6">
 
 <!--
 INFORMATIONS IMPORTANTES
@@ -32,7 +32,7 @@ Nouveau xml : Laurent Joly
 		<variable name="HelpGUIDx86" value="{06B1C15B-5A16-4C27-93F0-C6D615ED099D}"/>
 		<variable name="LoGUIDx64" value="{9645CDEF-085C-45F7-A3CD-B4B7046EF78C}"/>
 		<variable name="HelpGUIDx64" value="{AC4F01CF-D248-447F-AAC7-54C110C68530}"/>
-		<variable name="version" value="6.0.5"/>
+		<variable name="version" value="6.0.5.2"/>
 
 		<!-- telechargement des fichiers -->
 		<download url="https://download.documentfoundation.org/libreoffice/stable/6.0.5/win/x86/LibreOffice_6.0.5_Win_x86.msi" saveto="packages/libreoffice/LibreOffice_Win_x86.msi" md5sum="ddf499cb2217ebe6884c7a5a04bc6e0f"/>
