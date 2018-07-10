@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<packages>
+  <!-- Application 'OnlyOffice' extraite de packages.xml -->
+  <package id="OnlyOffice" name="OnlyOffice : suite bureautique compatible MS" revision="5.1.29.8" reboot="false" priority="1" category="bureautique" lnk="ONLYOFFICE">
+      <variable name="PROGRAMFILES" value="%PROGRAMFILES%" architecture="x86"/>
+      <variable name="PROGRAMFILES" value="%PROGRAMFILES%" architecture="x64"/>
+      <variable name="InstallLog" value="%SystemDrive%\netinst\logs\onlyoffice.txt"/>
+      <variable name="ComSpec" value="%SystemRoot%\System32\cmd.exe" architecture="x86"/>
+      <variable name="ComSpec" value="%SystemRoot%\SysWOW64\cmd.exe" architecture="x64"/>
+      <variable name="CSCRIPT" value="%SystemRoot%\System32\cscript.exe" architecture="x86"/>
+      <variable name="CSCRIPT" value="%SystemRoot%\SysWOW64\cscript.exe" architecture="x64"/>
+      <variable name="AllUsersPrograms" value="%ALLUSERSPROFILE%\Menu Démarrer\Programmes\" os="5\.\d\.\d{4}"/>
+      <variable name="AllUsersPrograms" value="%ALLUSERSPROFILE%\Microsoft\Windows\Start Menu\Programs" os="6\.\d\.\d{4}"/>
+      <variable name="AllUsersDesktop" value="%SystemDrive%\Documents and Settings\All Users\Bureau" os="5\.\d\.\d{4}"/>
+      <variable name="AllUsersDesktop" value="%SystemDrive%\Users\Public\Desktop" os="6\.\d\.\d{4}"/>
+      <download url="https://download.onlyoffice.com/install/desktop/editors/windows/distrib/onlyoffice/DesktopEditors_x64.exe"  saveto="packages/onlyoffice/onlyoffice64.exe" md5sum="d4cbdd1c3fe094006ab13344ed70d781" />
+      <download url="https://download.onlyoffice.com/install/desktop/editors/windows/distrib/onlyoffice/DesktopEditors_x86.exe"  saveto="packages/onlyoffice/onlyoffice32.exe" md5sum="5b5dd18791803fce83d046491fb5c3ea" />
+      <install cmd="&quot;%Z%\packages\onlyoffice\onlyoffice32.exe&quot; /VERYSILENT /SUPPRESSMSGBOXES /NORESTART  /SP-" architecture="x86"/>
+      <install cmd="&quot;%Z%\packages\onlyoffice\onlyoffice64.exe&quot; /VERYSILENT /SUPPRESSMSGBOXES /NORESTART  /SP-" architecture="x64"/>
+      <upgrade include="install"/>
+      <check type="uninstall" condition="exists" path="ONLYOFFICE Desktop Editors 5.1"/>
+      <remove cmd="%PROGRAMFILES%\ONLYOFFICE\DesktopEditors\unins000.exe /VERYSILENT /SUPPRESSMSGBOXES"/>
+  </package>
+</packages>
