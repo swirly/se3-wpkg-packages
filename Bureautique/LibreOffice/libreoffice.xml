@@ -1,0 +1,136 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<packages>
+	<package id="LibreOffice" name="LibreOffice 6.0" revision="6.0.5" reboot="false" priority="1" category="Bureautique" lnk="LibreOffice 6.0" category2="Bureautique" compatibilite="6">
+
+<!--
+INFORMATIONS IMPORTANTES
+Vous n'avez pas besoin de desinstaller la version deja installee de LibreOffice si c'est une version 3.4.5 ou superieure.
+Les versions inferieures doivent être desinstallees avant l'installation.
+Si vous avez une installation existante de LibreOffice, tous vos parametrages seront preserves et l'ancienne installation sera tout simplement remplacee.
+Si OpenOffice.org est installe sur l'ordinateur, il ne sera pas desinstalle. Seul le demarrage rapide d'OpenOffice devra être enleve si vous souhaitez utiliser celui de LibreOffice.
+
+PAR DEFAUT IL N'Y A PAS D'ASSOCIATIONS DE FICHIERS
+
+Nouveau xml : Laurent Joly
+-->
+		<depends package-id="jre"/>
+
+		<variable name="PROGRAMFILES" value="%PROGRAMFILES%" architecture="x86"/>
+		<variable name="PROGRAMFILES" value="%PROGRAMFILES%" architecture="x64"/>
+		<variable name="ComSpec" value="%SystemRoot%\System32\cmd.exe" architecture="x86"/>
+		<variable name="ComSpec" value="%SystemRoot%\SysWOW64\cmd.exe" architecture="x64"/>
+		<variable name="AllUsersPrograms" value="%ALLUSERSPROFILE%\Menu Démarrer\Programmes" os="5\.\d\.\d{4}"/>
+		<variable name="AllUsersPrograms" value="%ALLUSERSPROFILE%\Microsoft\Windows\Start Menu\Programs" os="(6|10)\.\d\.\d{4}"/>
+		<variable name="AllUsersDemarrage" value="%ALLUSERSPROFILE%\Menu Démarrer\Programmes\Démarrage" os="5\.\d\.\d{4}"/>
+		<variable name="AllUsersDemarrage" value="%ALLUSERSPROFILE%\Microsoft\Windows\Start Menu\Programs\Startup" os="(6|10)\.\d\.\d{4}"/>
+		<variable name="ALLUSERS_BUREAU" value="%ALLUSERSPROFILE%\Bureau" os="5\.\d\.\d{4}"/>
+		<variable name="ALLUSERS_BUREAU" value="%PUBLIC%\Desktop" os="(6|10)\.\d\.\d{4}"/>
+		<variable name="USER_BUREAU" value="%USERPROFILE%\Bureau" os="5\.\d\.\d{4}"/>
+		<variable name="USER_BUREAU" value="%USERPROFILE%\Desktop" os="(6|10)\.\d\.\d{4}"/>
+		<!-- version installee -->
+		<variable name="LoGUIDx86" value="{19821D00-A5A9-4AD6-9FC4-D20816062A50}"/>
+		<variable name="HelpGUIDx86" value="{06B1C15B-5A16-4C27-93F0-C6D615ED099D}"/>
+		<variable name="LoGUIDx64" value="{9645CDEF-085C-45F7-A3CD-B4B7046EF78C}"/>
+		<variable name="HelpGUIDx64" value="{AC4F01CF-D248-447F-AAC7-54C110C68530}"/>
+		<variable name="version" value="6.0.5"/>
+
+		<!-- telechargement des fichiers -->
+		<download url="https://download.documentfoundation.org/libreoffice/stable/6.0.5/win/x86/LibreOffice_6.0.5_Win_x86.msi" saveto="packages/libreoffice/LibreOffice_Win_x86.msi" md5sum="ddf499cb2217ebe6884c7a5a04bc6e0f"/>
+		<download url="https://download.documentfoundation.org/libreoffice/stable/6.0.5/win/x86/LibreOffice_6.0.5_Win_x86_helppack_fr.msi" saveto="packages/libreoffice/LibreOffice_Win_x86_helppack_fr.msi" md5sum="cee2e6e382fa7f6b3988526dab11220b"/>
+		<download url="https://download.documentfoundation.org/libreoffice/stable/6.0.5/win/x86_64/LibreOffice_6.0.5_Win_x64.msi" saveto="packages/libreoffice/LibreOffice_Win_x64.msi" md5sum="a3d4627b488b8f4055fe7b15f599f224"/>
+		<download url="https://download.documentfoundation.org/libreoffice/stable/6.0.5/win/x86_64/LibreOffice_6.0.5_Win_x64_helppack_fr.msi" saveto="packages/libreoffice/LibreOffice_Win_x64_helppack_fr.msi" md5sum="632ed645f4872add887d736414de53cc"/>
+		<download url="http://svn.tice.ac-caen.fr/svn/SambaEdu3/wpkg-packages-ng/files/libreoffice/CodesErreurs_WindowsInstaller.txt" saveto="packages/libreoffice/CodesErreurs_WindowsInstaller.txt" md5sum="846ef6423d0f40680fbd505ba7d9ab3f"/>
+
+		<delete file="packages/libreoffice/LibO_3.4.5_Win_x86_install_multi.exe"/>
+		<delete file="packages/libreoffice/LibO_3.4.5_Win_x86_helppack_fr.exe"/>
+		<delete file="packages/libreoffice/LibO_3.4.4_Win_x86_install_multi.exe"/>
+		<delete file="packages/libreoffice/LibO_3.4.4_Win_x86_helppack_fr.exe"/>
+		<delete file="packages/libreoffice/LibO_3.4.3_Win_x86_install_multi.exe"/>
+		<delete file="packages/libreoffice/LibO_3.4.3_Win_x86_helppack_fr.exe"/>
+		<delete file="packages/libreoffice/LibO_3.3.4_Win_x86_install_multi.exe"/>
+		<delete file="packages/libreoffice/LibO_3.3.3_Win_x86_install_multi.exe"/>
+		<delete file="packages/libreoffice/LibO_3.3.2_Win_x86_install_multi.exe"/>
+		<delete file="packages/libreoffice/LibO_3.3.1_Win_x86_install_multi.exe"/>
+		<delete file="packages/libreoffice/LibO_3.3.4_Win_x86_helppack_fr.exe"/>
+		<delete file="packages/libreoffice/LibO_3.3.1_Win_x86_helppack_fr.exe"/>
+		<delete file="packages/libreoffice/LibO_3.3.0_Win_x86_install_multi.exe"/>
+		<delete file="packages/libreoffice/LibO_3.3.0rc1_Win_x86_install_multi.exe"/>
+		<delete file="packages/libreoffice/LibO_3.3.0rc3_Win_x86_install_multi.exe"/>
+
+		<!-- En cas de mise a jour vers la version actuelle -->
+		<upgrade include="install"/>
+		<downgrade include="upgrade"/>
+
+		<!-- verification de la version -->
+		<check type="registry" condition="equals" path="HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\%LoGUIDx64%\DisplayVersion" value="%version%" architecture="x64"/>
+		<check type="registry" condition="equals" path="HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\%LoGUIDx86%\DisplayVersion" value="%version%" architecture="x86"/>
+
+		<!-- arret des services pouvant gener l'installation de libreoffice -->
+		<install cmd="%ComSpec% /C if /i exist %windir%\system32\taskkill.exe start &quot;Arret de firefox.exe&quot; /wait /min %windir%\system32\taskkill.exe /F /IM firefox.exe" timeout="10">
+			<exit code="any"/>
+		</install>
+		<install cmd="%ComSpec% /C if /i exist %windir%\system32\taskkill.exe start &quot;Arret de iexplore.exe&quot; /wait /min %windir%\system32\taskkill.exe /F /IM iexplore.exe" timeout="10">
+			<exit code="any"/>
+		</install>
+		<install cmd="%ComSpec% /C if /i exist %windir%\system32\taskkill.exe start &quot;Arret de soffice.exe&quot; /wait /min %windir%\system32\taskkill.exe /F /IM soffice.exe" timeout="10">
+			<exit code="any"/>
+		</install>
+		<install cmd="%ComSpec% /C if /i exist %windir%\system32\taskkill.exe start &quot;Arret de soffice.bin&quot; /wait /min %windir%\system32\taskkill.exe /F /IM soffice.bin" timeout="10">
+			<exit code="any"/>
+		</install>
+
+		<!-- installation sans association de fichiers -->
+		<install cmd="msiexec /I &quot;%Z%\packages\libreoffice\LibreOffice_Win_x86.msi&quot; /qn /LOG &quot;%SystemDrive%\Netinst\Logs\LibreOffice-Prog.log&quot; CREATEDESKTOPLINK=1 ADDLOCAL=ALL ALLUSERS=1 ISCHECKFORPRODUCTUPDATES=0 AgreeToLicense=1 RebootYesNo=No IS1036=1 SELECT_WORD=0 REGISTER_DOCX=0 REGISTER_DOC=0 REGISTER_DOCM=0 REGISTER_DOT=0 REGISTER_DOTX=0 REGISTER_DOTM=0 REGISTER_RTF=0 SELECT_EXCEL=0 REGISTER_XLS=0 REGISTER_XLSX=0 REGISTER_XLSM=0 REGISTER_XLSB=0 REGISTER_XLAM=0 REGISTER_XLT=0 REGISTER_XLTX=0 REGISTER_XLTM=0 SELECT_POWERPOINT=0 REGISTER_PPS=0 REGISTER_PPSX=0 REGISTER_PPSM=0 REGISTER_PPAM=0 REGISTER_PPT=0 REGISTER_PPTX=0 REGISTER_PPTM=0 REGISTER_POT=0 REGISTER_POTX=0 REGISTER_POTM=0" architecture="x86"/>
+		<install cmd="msiexec /I &quot;%Z%\packages\libreoffice\LibreOffice_Win_x64.msi&quot; /qn /LOG &quot;%SystemDrive%\Netinst\Logs\LibreOffice-Prog.log&quot; CREATEDESKTOPLINK=1 ADDLOCAL=ALL ALLUSERS=1 ISCHECKFORPRODUCTUPDATES=0 AgreeToLicense=1 RebootYesNo=No IS1036=1 SELECT_WORD=0 REGISTER_DOCX=0 REGISTER_DOC=0 REGISTER_DOCM=0 REGISTER_DOT=0 REGISTER_DOTX=0 REGISTER_DOTM=0 REGISTER_RTF=0 SELECT_EXCEL=0 REGISTER_XLS=0 REGISTER_XLSX=0 REGISTER_XLSM=0 REGISTER_XLSB=0 REGISTER_XLAM=0 REGISTER_XLT=0 REGISTER_XLTX=0 REGISTER_XLTM=0 SELECT_POWERPOINT=0 REGISTER_PPS=0 REGISTER_PPSX=0 REGISTER_PPSM=0 REGISTER_PPAM=0 REGISTER_PPT=0 REGISTER_PPTX=0 REGISTER_PPTM=0 REGISTER_POT=0 REGISTER_POTX=0 REGISTER_POTM=0" architecture="x64"/>
+
+		<!-- installation avec association de fichiers
+		<install cmd="msiexec /I &quot;%Z%\packages\libreoffice\LibreOffice_Win_x86.msi&quot; /qn /LOG &quot;%SystemDrive%\Netinst\Logs\LibreOffice-Prog.log&quot; CREATEDESKTOPLINK=1 ADDLOCAL=ALL ALLUSERS=1 ISCHECKFORPRODUCTUPDATES=0 AgreeToLicense=1 RebootYesNo=No IS1036=1 SELECT_WORD=1 REGISTER_DOCX=1 REGISTER_DOC=1 REGISTER_DOCM=1 REGISTER_DOT=1 REGISTER_DOTX=1 REGISTER_DOTM=1 REGISTER_RTF=1 SELECT_EXCEL=1 REGISTER_XLS=1 REGISTER_XLSX=1 REGISTER_XLSM=1 REGISTER_XLSB=1 REGISTER_XLAM=1 REGISTER_XLT=1 REGISTER_XLTX=1 REGISTER_XLTM=1 SELECT_POWERPOINT=1 REGISTER_PPS=1 REGISTER_PPSX=1 REGISTER_PPSM=1 REGISTER_PPAM=1 REGISTER_PPT=1 REGISTER_PPTX=1 REGISTER_PPTM=1 REGISTER_POT=1 REGISTER_POTX=1 REGISTER_POTM=1" architecture="x86"/>
+		<install cmd="msiexec /I &quot;%Z%\packages\libreoffice\LibreOffice_Win_x64.msi&quot; /qn /LOG &quot;%SystemDrive%\Netinst\Logs\LibreOffice-Prog.log&quot; CREATEDESKTOPLINK=1 ADDLOCAL=ALL ALLUSERS=1 ISCHECKFORPRODUCTUPDATES=0 AgreeToLicense=1 RebootYesNo=No IS1036=1 SELECT_WORD=1 REGISTER_DOCX=1 REGISTER_DOC=1 REGISTER_DOCM=1 REGISTER_DOT=1 REGISTER_DOTX=1 REGISTER_DOTM=1 REGISTER_RTF=1 SELECT_EXCEL=1 REGISTER_XLS=1 REGISTER_XLSX=1 REGISTER_XLSM=1 REGISTER_XLSB=1 REGISTER_XLAM=1 REGISTER_XLT=1 REGISTER_XLTX=1 REGISTER_XLTM=1 SELECT_POWERPOINT=1 REGISTER_PPS=1 REGISTER_PPSX=1 REGISTER_PPSM=1 REGISTER_PPAM=1 REGISTER_PPT=1 REGISTER_PPTX=1 REGISTER_PPTM=1 REGISTER_POT=1 REGISTER_POTX=1 REGISTER_POTM=1" architecture="x64"/>
+		desactive -->
+
+		<!-- installation du module d'aide -->
+		<install cmd="msiexec /I &quot;%Z%\packages\libreoffice\LibreOffice_Win_x86_helppack_fr.msi&quot; /qn /LOG &quot;%SystemDrive%\Netinst\Logs\LibreOffice-Help.log&quot;" architecture="x86"/>
+		<install cmd="msiexec /I &quot;%Z%\packages\libreoffice\LibreOffice_Win_x64_helppack_fr.msi&quot; /qn /LOG &quot;%SystemDrive%\Netinst\Logs\LibreOffice-Help.log&quot;" architecture="x64"/>
+
+		<!-- deinstallation de la version installee par ce xml -->
+		<remove cmd="MsiExec.exe /X%LoGUIDx86% /qn" architecture="x86">
+			<exit code="1605" reboot="false"/>
+			<exit code="1612" reboot="false"/>
+		</remove>
+		<remove cmd="MsiExec.exe /X%LoGUIDx64% /qn" architecture="x64">
+			<exit code="1605" reboot="false"/>
+			<exit code="1612" reboot="false"/>
+		</remove>
+		<remove cmd="MsiExec.exe /X%HelpGUIDx86% /qn" architecture="x86">
+			<exit code="1605" reboot="false"/>
+			<exit code="1612" reboot="false"/>
+		</remove>
+		<remove cmd="MsiExec.exe /X%HelpGUIDx64% /qn" architecture="x64">
+			<exit code="1605" reboot="false"/>
+			<exit code="1612" reboot="false"/>
+		</remove>
+		<!-- nettoyage -->
+		<remove cmd="%ComSpec% /C if /i exist &quot;%PROGRAMFILES%\LibreOffice 3.4&quot; rmdir /s /q &quot;%PROGRAMFILES%\LibreOffice 3.4&quot;">
+			<exit code="any"/>
+		</remove>
+		<remove cmd="%ComSpec% /C if /i exist &quot;%PROGRAMFILES%\LibreOffice 4&quot; rmdir /s /q &quot;%PROGRAMFILES%\LibreOffice 4&quot;">
+			<exit code="any"/>
+		</remove>
+		<remove cmd="%ComSpec% /C if /i exist &quot;%PROGRAMFILES%\LibreOffice 4.0&quot; rmdir /s /q &quot;%PROGRAMFILES%\LibreOffice 4.0&quot;">
+			<exit code="any"/>
+		</remove>
+		<remove cmd="%ComSpec% /C if /i exist &quot;%PROGRAMFILES%\LibreOffice 5&quot; rmdir /s /q &quot;%PROGRAMFILES%\LibreOffice 5&quot;">
+			<exit code="any"/>
+		</remove>
+		<remove cmd="%ComSpec% /C if /i exist &quot;%PROGRAMFILES%\LibreOffice 5.0&quot; rmdir /s /q &quot;%PROGRAMFILES%\LibreOffice 5.0&quot;">
+			<exit code="any"/>
+		</remove>
+		<remove cmd="%ComSpec% /C if /i exist &quot;%PROGRAMFILES%\LibreOffice 6&quot; rmdir /s /q &quot;%PROGRAMFILES%\LibreOffice 6&quot;">
+			<exit code="any"/>
+		</remove>
+		<remove cmd="%ComSpec% /C if /i exist &quot;%PROGRAMFILES%\LibreOffice&quot; rmdir /s /q &quot;%PROGRAMFILES%\LibreOffice&quot;">
+			<exit code="any"/>
+		</remove>
+
+	</package>
+</packages>
