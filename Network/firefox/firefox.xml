@@ -1,0 +1,67 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<packages>
+	<!-- mise a jour par Laurent Joly -->
+	<package id="firefox" name="FireFox ESR 60" revision="60.1.0" reboot="false" priority="3" category="Internet" lnk="Mozilla Firefox.lnk" category2="Internet" compatibilite="7">
+
+	<variable name="ComSpec" value="%SystemRoot%\System32\cmd.exe" architecture="x86"/>
+	<variable name="ComSpec" value="%SystemRoot%\SysWOW64\cmd.exe" architecture="x64"/>
+	<variable name="PROGRAMFILES" value="%PROGRAMFILES%" architecture="x86"/>
+	<variable name="PROGRAMFILES" value="%PROGRAMFILES(X86)%" architecture="x64"/>
+	<variable name="AllUsersPrograms" value="%ALLUSERSPROFILE%\Menu Démarrer\Programmes" os="5\.\d\.\d{4}"/>
+	<variable name="AllUsersPrograms" value="%ALLUSERSPROFILE%\Microsoft\Windows\Start Menu\Programs" os="(6|10)\.\d\.\d{4}"/>
+	<variable name="ALLUSERS_BUREAU" value="%ALLUSERSPROFILE%\Bureau" os="5\.\d\.\d{4}"/>
+	<variable name="ALLUSERS_BUREAU" value="%PUBLIC%\Desktop" os="(6|10)\.\d\.\d{4}"/>
+	<variable name="USER_BUREAU" value="%USERPROFILE%\Bureau" os="5\.\d\.\d{4}"/>
+	<variable name="USER_BUREAU" value="%USERPROFILE%\Desktop" os="(6|10)\.\d\.\d{4}"/>
+	<variable name="InstallLog" value="%SystemDrive%\Netinst\Logs\firefox.log"/>
+
+	<check type="file" condition="versiongreaterorequal" path="%PROGRAMFILES%\Mozilla Firefox\firefox.exe" value="60.1.0"/>
+
+	<download url="https://download-installer.cdn.mozilla.net/pub/firefox/releases/60.1.0esr/win32/fr/Firefox%20Setup%2060.1.0esr.exe" saveto="packages/firefox/FirefoxSetup.exe" md5sum="ca5c0f3c7b4568d0cca5654c0840fcc1"/>
+
+
+	<delete file="packages/firefox/FirefoxSetup17.0.7esr.exe"/>
+	<delete file="packages/firefox/FirefoxSetup17.0.5esr.exe"/>
+	<delete file="packages/firefox/FirefoxSetup17.0.2esr.exe"/>
+	<delete file="packages/firefox/FirefoxSetup17.0esr.exe"/>
+	<delete file="packages/firefox/dictionnaire_hunspell_en_fran__ais__r__forme_1990_-2.1-fx+tb+sm.xpi"/>
+	<delete file="packages/firefox/dictionnaire_myspell_en_fran__ais__r__forme_1990_-1.6-fx+tb+sm.xpi"/>
+	<delete file="packages/firefox/dictionnaire_myspell_en_fran__ais__r__forme_1990_-1.5-fx+tb+sm.xpi"/>
+	<delete file="packages/firefox/dictionnaire_myspell_en_fran_ccedil_ais_r_eacute_forme_1990_-1.0.1-fx+zm+tb.xpi"/>
+	<delete file="packages/firefox/dictionnaire_fran__ais___classique__amp__r__forme_1990__-4.0.1-fx+tb+sm.xpi"/>
+	<delete file="packages/firefox/dictionnaire_hunspell_en_fran__ais__r__forme_1990_-2.0-fx+tb+sm.xpi"/>
+
+
+	<!--<download url="http://svn.tice.ac-caen.fr/svn/SambaEdu3/wpkg-packages-ng/files/firefox/firefox-profile.js" saveto="packages/firefox/firefox-profile.orig.js" md5sum="ad61a43280f6f0bfff8f2cb114854b93"/>
+	<download url="http://svn.tice.ac-caen.fr/svn/SambaEdu3/wpkg-packages-ng/files/firefox/firefox-config.bat" saveto="packages/firefox/firefox-config.bat" md5sum="09b69a71ac30460ce53c23c8b67132fc"/>
+	<download url="http://svn.tice.ac-caen.fr/svn/SambaEdu3/wpkg-packages-ng/files/firefox/firefoxfix.reg" saveto="packages/firefox/firefoxfix.reg" md5sum="062f4d809c4735ac261316a0c0b1372a"/>
+	-->
+	<download url="http://svn.tice.ac-caen.fr/svn/SambaEdu3/wpkg-packages-ng/files/firefox/firefox-uninst.bat" saveto="packages/firefox/firefox-uninst.bat" md5sum="b4b526762383f65fa01f15a0a55e4ff2"/>
+	<download url="http://svn.tice.ac-caen.fr/svn/SambaEdu3/wpkg-packages-ng/files/firefox/firefox-plugin.bat" saveto="packages/firefox/firefox-plugin.bat" md5sum="4381f3666b1759c6fc949c88462b8652"/>
+
+	<!-- Avant l'installation de la nouvelle version, on désinstalle la précédente -->
+	<install include="remove"/>
+	<!-- En cas de mise à jour vers la version actuelle -->
+	<upgrade include="install"/>
+	<downgrade include="upgrade"/>
+
+	<install cmd="%Z%\packages\firefox\FirefoxSetup.exe -ms" timeout="1800"/>
+	<!-- Configuration de Firefox pour que les parametres du profil soient lus dans \\se3\install\packages\firefox\firefox-profile.js
+	<install cmd="%ComSpec% /C call %Z%\packages\firefox\firefox-config.bat &gt;%InstallLog%"/>
+	<install cmd="%ComSpec% /C regedit /S %Z%\packages\firefox\firefoxfix.reg"/>
+	-->
+	<!-- Met a jour flashPlayer et shockwave s'ils sont deja installes ; sinon, ne fait rien -->
+	<install cmd="%ComSpec% /C call %Z%\packages\firefox\firefox-plugin.bat &gt;&gt;%InstallLog%" timeout="600"  os="(5|6)\.\d\.\d{4}"/>
+	<install cmd="%ComSpec% /C call %Z%\packages\firefox\firefox-plugin.bat &gt;&gt;%InstallLog%" timeout="600"  os="(10)\.\d\.\d{4}">
+		<exit code="any"/>
+	</install>
+
+	<!-- Suppression des mises a jour automatiques "Mozilla Maintenance Service"-->
+	<install cmd="%ComSpec% /C If /i Exist &quot;%PROGRAMFILES%\Mozilla Maintenance Service\uninstall.exe&quot; &quot;%PROGRAMFILES%\Mozilla Maintenance Service\uninstall.exe&quot; /S"/>
+
+	<remove cmd="%ComSpec% /C call %Z%\packages\firefox\firefox-uninst.bat &gt;&gt;%InstallLog%" timeout="600"/>
+	<remove cmd="%ComSpec% /C if exist &quot;%ALLUSERS_BUREAU%\Mozilla Firefox.lnk&quot; del /F /Q &quot;%ALLUSERS_BUREAU%\Mozilla Firefox.lnk&quot;"/>
+	<remove cmd="%ComSpec% /C if exist &quot;%USER_BUREAU%\Mozilla Firefox.lnk&quot; del /F /Q &quot;%USER_BUREAU%\Mozilla Firefox.lnk&quot;"/>
+
+	</package>
+</packages>
