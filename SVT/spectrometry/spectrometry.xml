@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<packages>
+  <package id="spectrometry" name="Spectrometry : Spectrometre Sordalab/Pasco" revision="0.1" reboot="false" priority="1" category="Physique-Chimie" lnk="Spectrometry.lnk">
+      <variable name="InstallLog" value="%SystemDrive%\netinst\logs\spectrometry.txt"/>
+      <variable name="PROGRAMFILES" value="%PROGRAMFILES%" architecture="x86"/>
+      <variable name="PROGRAMFILES" value="%PROGRAMFILES(X86)%" architecture="x64"/>
+      <variable name="ComSpec" value="%SystemRoot%\System32\cmd.exe" architecture="x86"/>
+      <variable name="ComSpec" value="%SystemRoot%\SysWOW64\cmd.exe" architecture="x64"/>
+      <variable name="CSCRIPT" value="%SystemRoot%\System32\cscript.exe" architecture="x86"/>
+      <variable name="CSCRIPT" value="%SystemRoot%\SysWOW64\cscript.exe" architecture="x64"/>
+      <variable name="AllUsersPrograms" value="%ALLUSERSPROFILE%\Menu DÃ©marrer\Programmes\" os="5\.\d\.\d{4}"/>
+      <variable name="AllUsersPrograms" value="%ALLUSERSPROFILE%\Microsoft\Windows\Start Menu\Programs" os="6\.\d\.\d{4}"/>
+      <variable name="AllUsersDesktop" value="%SystemDrive%\Documents and Settings\All Users\Bureau" os="5\.\d\.\d{4}"/>
+      <variable name="AllUsersDesktop" value="%SystemDrive%\Users\Public\Desktop" os="6\.\d\.\d{4}"/>
+      <download url="http://www.sordalab.com/documents/spectrometry_francais.zip" md5sum="8e54068e5f09418c9ac36e9a9f899d0d" saveto="packages/spectrometry/spectrometry.zip"/>
+      <check type="uninstall" condition="exists" path="Spectrometry"/>
+      <install include="remove"/>
+      <install cmd="%Z%\wpkg\tools\7za.exe e -o&quot;%windir%\installer&quot; -y -bd &quot;%Z%\packages\spectrometry\spectrometry.zip&quot; "/>
+      <install cmd="%windir%\installer\Spectrometry_francais.exe /S /v/qn" timeout="1800"/>
+      <install cmd="%ComSpec% rmdir /Q /S &quot;C:\ProgramData\Microsoft\Windows\Start Menu\Programs\PASCO Scientific&quot;"/>
+      <install cmd="%ComSpec% del /F /S /Q /A &quot;C:\ProgramData\Microsoft\Windows\Start Menu\Programs\PASCO Spectrometer.lnk&quot;"/>
+      <upgrade include="install"/>
+      <remove cmd="wmic product where name=&quot;Spectrometry&quot; call uninstall"/>
+      <remove cmd="wmic product where name=&quot;PascoCommonFiles&quot; call uninstall"/>
+      <remove cmd="wmic product where name=&quot;PascoUSBDriver&quot; call uninstall"/>
+      <remove cmd="%ComSpec% rmdir /Q /S &quot;%PROGRAMFILES(X86)\PASCO Scientific&quot;"/>
+  </package>
+</packages>

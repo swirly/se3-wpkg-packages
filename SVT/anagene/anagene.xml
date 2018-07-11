@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<packages>
+  <!-- Application 'Anagene' extraite de packages.xml -->
+  <package id="Anagene" name="Anagène : logiciel de manipulation de séquences d'ADN/ARN/proteines" revision="2.1.0.34" reboot="false" priority="1" category="SVT" lnk="anagene.lnk">
+      <variable name="InstallLog" value="%SystemDrive%\netinst\logs\anagene.txt"/>
+      <variable name="PROGRAMFILES" value="%PROGRAMFILES%" architecture="x86"/>
+      <variable name="PROGRAMFILES" value="%PROGRAMFILES(X86)%" architecture="x64"/>
+      <variable name="ComSpec" value="%SystemRoot%\System32\cmd.exe" architecture="x86"/>
+      <variable name="ComSpec" value="%SystemRoot%\SysWOW64\cmd.exe" architecture="x64"/>
+      <variable name="CSCRIPT" value="%SystemRoot%\System32\cscript.exe" architecture="x86"/>
+      <variable name="CSCRIPT" value="%SystemRoot%\SysWOW64\cscript.exe" architecture="x64"/>
+      <variable name="AllUsersPrograms" value="%ALLUSERSPROFILE%\Menu Démarrer\Programmes\" os="5\.\d\.\d{4}"/>
+      <variable name="AllUsersPrograms" value="%ALLUSERSPROFILE%\Microsoft\Windows\Start Menu\Programs" os="6\.\d\.\d{4}"/>
+      <variable name="AllUsersDesktop" value="%SystemDrive%\Documents and Settings\All Users\Bureau" os="5\.\d\.\d{4}"/>
+      <variable name="AllUsersDesktop" value="%SystemDrive%\Users\Public\Desktop" os="6\.\d\.\d{4}"/>
+      <download url="http://acces.ens-lyon.fr/acces/thematiques/acces/thematiques/evolution/logiciels/anagene/temp/Anagene2plus.zip/" md5sum="f8f30814b4cc61cd14fc8c75a4443b05" saveto="packages/anagene/anagene.zip"/>
+      <download url="acces.ens-lyon.fr/acces/thematiques/acces/thematiques/evolution/logiciels/anagene/mise-a-jour-2017/Anagene2Plus_maj_2017.zip" md5sum="eeb337e39c8c5601282e96a4bdc466bc" saveto="packages/anagene/Anagene2Plus_maj_2017.zip"/>
+      <install cmd="%ComSpec% /C xcopy &quot;%Z%\packages\anagene\Anagene\Common\Microsoft Shared\DAO\*.*&quot; &quot;%PROGRAMFILES%\Common Files\Microsoft Shared\DAO&quot; /I /V /F /H /R /Y &gt;NUL"><exit code="4"/></install>
+      <install cmd="msiexec /passive ALLUSERS=1 /i &quot;%Z%\packages\anagene\Anagene\Anagène 2.msi&quot; /log &quot;%SystemDrive%\netinst\logs\anagene.log&quot;"/>
+      <install cmd="%ComSpec% /C CACLS.EXE &quot;%PROGRAMFILES%\Anagene2&quot; /E /G BUILTIN\Utilisateurs:C &gt;NUL" timeout="120"/>
+      <install cmd="%ComSpec% /c if not exist &quot;%SystemDrive%\Temp&quot; mkdir &quot;%SystemDrive%\Temp&quot;"/>
+      <install cmd="%ComSpec% /C CACLS.EXE &quot;C:\Temp&quot; /E /G BUILTIN\Utilisateurs:C &gt;NUL" timeout="120"/>
+      <install cmd="%ComSpec% /C xcopy &quot;%Z%\packages\anagene\Anagene2Plus_maj_2017\*&quot; &quot;%PROGRAMFILES%\Anagene2&quot; /I /V /H /R /Y &gt;NUL"/>
+      <install cmd="%COMSPEC% /C if exist &quot;%AllUsersPrograms%\Anagène 2&quot; rmdir /Q /S &quot;%AllUsersPrograms%\Anagène 2&quot;"/>
+<!--
+      <check type="uninstall" condition="exists" path="Anagène 2" />
+      <install include="remove" />
+      <install cmd="%Z%\wpkg\tools\7za.exe e -o&quot;%SystemDrive%\Temp\anagene&quot; -y -bd &quot;%Z%\packages\anagene\anagene.zip&quot; " />
+      <install cmd='%Z%\packages\anagene\Anagene\setup.exe /S /v/qn'/>
+      <remove cmd="msiexec /uninstall /passive /i &quot;%Z%\packages\anagene\Anagene\Anagene2.msi&quot; /log &quot;%SystemDrive%\netinst\logs\anagene.log&quot;"/>
+-->
+
+      <check type="file" condition="versiongreaterorequal" path="%PROGRAMFILES%\Anagene2\anagene2.exe" value="2.1.0.34"/>
+      <check type="uninstall" condition="exists" path="Anagène 2"/>
+
+      <upgrade include="remove"/>
+      <upgrade include="install"/>
+      <downgrade include="upgrade"/>
+
+      <upgrade include="install"/>
+      <remove cmd="wmic product where name=&quot;Anagène 2&quot; call uninstall"/>
+      <remove cmd="%ComSpec% /C if exist &quot;%PROGRAMFILES%\Anagene2&quot; rmdir /Q /S &quot;%PROGRAMFILES%\Anagene2&quot;"/>
+  </package>
+</packages>
