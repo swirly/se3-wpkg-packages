@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<packages>
+  <package id="ethnos" name="Ethnos" revision="5.5" reboot="false" priority="10">
+    <variable name="PROGRAMFILES" value="%PROGRAMFILES%" architecture="x86"/>
+    <variable name="PROGRAMFILES" value="%PROGRAMFILES(x86)%" architecture="x64"/>
+    <variable name="ComSpec" value="%SystemRoot%\System32\cmd.exe" architecture="x86"/>
+    <variable name="ComSpec" value="%SystemRoot%\SysWOW64\cmd.exe" architecture="x64"/>
+
+    <check type="uninstall" condition="exists" path="Ethnos 5.5 Web"/>
+
+    <download saveto="packages/Ethnos/Ethnos_5.5_Web.msi"/>
+
+    <install cmd="msiexec /qn /i %Z%\packages\Ethnos\Ethnos_5.5_Web.msi"/>
+    <install cmd="regedit /s %Z%\packages\Ethnos\key.reg "/>
+    <install cmd="%ComSpec% /C cacls.exe &quot;%PROGRAMFILES%\Ethnos 5.5 Web&quot; /E /T /P &quot;Tout le monde:C&quot; "/>
+
+    <upgrade include="install"/>
+    <downgrade include="upgrade"/>
+
+    <!-- this is sometimes slow, but works, and does not rely on the original installer being available -->
+    <remove cmd="%COMSPEC% /c wmic process where name=&quot;Ethnos 5.5 Web&quot; call terminate"/>
+    <remove cmd="%COMSPEC% /c wmic product where name=&quot;Ethnos 5.5 Web&quot; call uninstall"/>
+    <remove cmd="%COMSPEC% /c if exists &quot;%ProgramFiles%\Ethnos 5.5 Web\&quot; rmdir /S /Q  &quot;%ProgramFiles%\Ethnos 5.5 Web\&quot;&quot; timeout=&quot;1800"/>
+
+  </package>
+</packages>
