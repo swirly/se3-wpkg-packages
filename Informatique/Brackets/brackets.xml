@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<packages>
+  <!-- Application 'googlechrome' extraite de packages.xml -->
+  <package id="Brackets" name="Brackets" revision="1.13" priority="1" reboot="false" category="Informatique" lnk="Brackets">
+
+  <variable name="version" value="1.13"/>
+
+  <variable name="PROGRAMFILES" value="%PROGRAMFILES%" architecture="x86"/>
+  <variable name="PROGRAMFILES" value="%PROGRAMFILES(X86)%" architecture="x64"/>
+  <variable name="ComSpec" value="%SystemRoot%\System32\cmd.exe" architecture="x86"/>
+  <variable name="ComSpec" value="%SystemRoot%\SysWOW64\cmd.exe" architecture="x64"/>
+  <variable name="ALLUSERS_BUREAU" value="%ALLUSERSPROFILE%\Bureau" os="5\.\d\.\d{4}"/>
+  <variable name="ALLUSERS_BUREAU" value="%PUBLIC%\Desktop" os="6\.\d\.\d{4}"/>
+  <variable name="USER_BUREAU" value="%USERPROFILE%\Bureau" os="5\.\d\.\d{4}"/>
+  <variable name="USER_BUREAU" value="%USERPROFILE%\Desktop" os="6\.\d\.\d{4}"/>
+  <variable name="AllUsersPrograms" value="%ALLUSERSPROFILE%\Menu Démarrer\Programmes" os="5\.\d\.\d{4}"/>
+  <variable name="AllUsersPrograms" value="%ALLUSERSPROFILE%\Microsoft\Windows\Start Menu\Programs" os="6\.\d\.\d{4}"/>
+  <variable name="HKLM_Software" value="HKLM\SOFTWARE" architecture="x86"/>
+  <variable name="HKLM_Software" value="HKLM\SOFTWARE\Wow6432Node" architecture="x64"/>
+
+  <!-- Téléchargement du (des) fichier(s) -->
+  <download url="https://github.com/adobe/brackets/releases/download/release-1.13/Brackets.Release.1.13.msi" saveto="packages/Brackets/Brackets.msi" md5sum="5433fc64063688fc1089bc267874867b"/>
+
+  <!-- Test de présence de la version actuelle -->
+  <check type="file" condition="versiongreaterorequal" path="%ProgramFiles%\Brackets\Brackets.exe" value="%version%"/>
+
+  <!-- Installation de la version actuelle -->
+  <install cmd="msiexec /qn /norestart /i &quot;%z%\packages\Brackets\Brackets.msi&quot;">
+    <!--Une autre version de ce produit est déjà  installée-->
+    <exit code="1638"/>
+  </install>
+  <!-- categorie informatique plutot que internet -->
+  <install cmd="%ComSpec% /C if /i exist &quot;%AllUsersPrograms%\Internet\Brackets.lnk&quot; start &quot;&quot; /b /wait del /f /q &quot;%AllUsersPrograms%\Internet\Brackets.lnk&quot; "/>
+  <!-- Création du dossier de rangement par catégorie Informatique si absent-->
+  <install cmd="%ComSpec% /C if /i not exist &quot;%AllUsersPrograms%\Informatique&quot; start &quot;&quot; /b /wait md &quot;%AllUsersPrograms%\Informatique&quot; "/>
+
+  <!-- On bouge le répertoire -->
+  <install cmd="%COMSPEC% /c if exist &quot;%AllUsersPrograms%\Brackets.*&quot; move /y &quot;%AllUsersPrograms%\Brackets.*&quot; &quot;%AllUsersPrograms%\Informatique\&quot; "/>
+
+	<upgrade include="install"/>
+	<downgrade include="upgrade"/>
+
+	<!-- this is sometimes slow, but works, and does not rely on the original installer being available -->
+	<remove cmd="%COMSPEC% /c wmic process where name=&quot;Brackets&quot; call terminate"/>
+	<remove cmd="%COMSPEC% /c wmic product where name=&quot;Brackets&quot; call uninstall"/>
+	<remove cmd="%COMSPEC% /c if exists &quot;%ProgramFiles%\Brackets\&quot; rmdir /S /Q  &quot;%ProgramFiles%\Brackets\&quot;" timeout="1800"/>
+
+    <!-- Suppression des raccourcis dans le menu Demarrer -->
+  	<remove cmd="%ComSpec% /C if /i exist &quot;%AllUsersPrograms%\Informatique\Brackets.lnk&quot; start &quot;&quot; /b /wait del /f /q &quot;%AllUsersPrograms%\Informatique\Brackets.lnk&quot; "/>
+  	</package>
+</packages>

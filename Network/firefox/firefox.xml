@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <packages>
 	<!-- mise a jour par Laurent Joly -->
-	<package id="firefox" name="FireFox ESR 60" revision="60.1.0" reboot="false" priority="3" category="Internet" lnk="Mozilla Firefox.lnk" category2="Internet" compatibilite="7">
+	<package id="firefox" name="FireFox ESR 60" revision="60.2.0" reboot="false" priority="3" category="Internet" lnk="Mozilla Firefox.lnk" category2="Internet" compatibilite="7">
 
 	<variable name="ComSpec" value="%SystemRoot%\System32\cmd.exe" architecture="x86"/>
 	<variable name="ComSpec" value="%SystemRoot%\SysWOW64\cmd.exe" architecture="x64"/>
@@ -17,7 +17,7 @@
 
 	<check type="file" condition="versiongreaterorequal" path="%PROGRAMFILES%\Mozilla Firefox\firefox.exe" value="60.1.0"/>
 
-	<download url="https://download-installer.cdn.mozilla.net/pub/firefox/releases/60.1.0esr/win32/fr/Firefox%20Setup%2060.1.0esr.exe" saveto="packages/firefox/FirefoxSetup.exe" md5sum="ca5c0f3c7b4568d0cca5654c0840fcc1"/>
+	<download url="https://download-installer.cdn.mozilla.net/pub/firefox/releases/60.2.0esr/win32/fr/Firefox%20Setup%2060.2.0esr.exe" saveto="packages/firefox/FirefoxSetup.exe" md5sum="a126adc3ad0651d48c5f0738b594e498"/>
 
 
 	<delete file="packages/firefox/FirefoxSetup17.0.7esr.exe"/>
